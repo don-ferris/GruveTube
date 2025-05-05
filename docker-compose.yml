@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: mysql:8.0
@@ -12,7 +10,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - ${CONTAINER_NAME}/data/mysql:/var/lib/mysql
+      - /home/kahuna/docker/gruvetube/data/mysql:/var/lib/mysql
     networks:
       - gruvetube_network
 
