@@ -9,10 +9,13 @@ is available in src/models.py, and that your Flask app is initialized in src/app
 
 from werkzeug.security import generate_password_hash
 from src.models import db, User
-from src.app import app  # If your app instance is defined in src/app.py
+from src.app import app  # Ensure your Flask app instance is imported correctly
 
 def seed_test_user():
     with app.app_context():
+        # Create all tables if they don't exist
+        db.create_all()
+        
         # Check if the test user already exists
         existing_user = User.query.filter_by(username="testuser").first()
         if existing_user:
