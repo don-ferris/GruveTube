@@ -15,7 +15,9 @@ services:
       - gruvetube_network
 
   web:
-    image: python:3.11
+    build:
+      context: /home/kahuna/docker/gruvetube
+      dockerfile: Dockerfile
     container_name: ${CONTAINER_NAME}
     restart: unless-stopped
     env_file: .env
@@ -24,7 +26,6 @@ services:
     working_dir: /app
     volumes:
       - /home/kahuna/docker/gruvetube:/app:rw
-      - /home/kahuna/docker/gruvetube/src:/app/src:rw
       - ${VIDEO_DOWNLOAD_PATH}:/app/data/videos
       - ${MUSIC_DOWNLOAD_PATH}:/app/data/music
     networks:
