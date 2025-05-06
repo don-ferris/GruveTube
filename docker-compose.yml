@@ -24,6 +24,7 @@ services:
     working_dir: /app
     volumes:
       - /home/kahuna/docker/gruvetube:/app:rw
+      - /home/kahuna/docker/gruvetube/src:/app/src:rw
       - ${VIDEO_DOWNLOAD_PATH}:/app/data/videos
       - ${MUSIC_DOWNLOAD_PATH}:/app/data/music
     networks:
