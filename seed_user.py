@@ -13,6 +13,8 @@ from src.app import app  # Ensure your Flask app instance is imported correctly
 
 def seed_test_user():
     with app.app_context():
+        # Initialize the SQLAlchemy instance with the app
+        db.init_app(app)
         # Create all tables if they don't exist
         db.create_all()
         
