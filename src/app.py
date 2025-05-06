@@ -1,14 +1,22 @@
-from flask import Flask
 import os
+from flask import Flask
+from src.models import db
 
 app = Flask(__name__)
 
-# Load configuration from environment variables
-app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
+# Configure SQLAlchemy with MySQL parameters fetched from environment variables.
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f"mysql+mysqlconnector://{os.environ.get('MYSQL_USER')}:{os.environ.get('MYSQL_PASSWORD')}"
+    f"@db/{os.environ.get('MYSQL_DATABASE')}"
+)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize SQLAlchemy with the Flask app.
+db.init_app(app)
 
 @app.route('/')
-def home():
+def index():
     return "Welcome to GruveTube!"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host="0.0.0.0", port=5000)
